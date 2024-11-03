@@ -1,0 +1,86 @@
+{
+    "person": {
+        "role": "Web Developer"
+    },
+    "newsletter": {
+        "title": "Subscribe to {firstName}'s Newsletter",
+        "description": "I occasionally write about My Learning, technology and share thoughts on the intersection of New Technologies and engineering",
+        "button": "Sign up"
+    },
+    "home": {
+        "label": "Home",
+        "title": "{name}'s Portfolio",
+        "description": "Portfolio website showcasing my work as a {role}",
+        "headline": "Web Developer and Open Source Contributor",
+        "subline": "I'm Anuj, Sophomore at VIPS doing my undergrad in AI & DS, where I am learning about Artificial Intelligence & Dat Science. After hours, I build my own projects and love to contribute to Open Source."
+    },
+    "about": {
+        "label": "About",
+        "title": "About me",
+        "description": "Meet {name}, {role} from {location}",
+        "intro": {
+            "title": "Introduction",
+            "description": "Anuj is a 2nd Year undergrad at VIPS, pursuing B-Tech in Aritificial Intelligence and Data Science. His Tech Stacks are Based on Typescript and JavaScript. He loves to Contribute to Open Source."
+        },
+        "work": {
+            "title": "Work Experience",
+            "experiences": {
+                "Layer5": {
+                    "timeframe": "Sep, 2024 - Present",
+                    "role": "Open Source Contributor",
+                    "achievements": "Improved UI/UX by developing new components using Next.js and Tailwind CSS. Implemented automation scripts in Node.js to optimize the build process.;Refactored many Key components from class-based to functional components, ensuring compatibility with MUI v5 and modern React practices."
+                },
+                "Kiwix": {
+                    "timeframe": "Sep, 2024 - Present",
+                    "role": "Open Source Contributor",
+                    "achievements": "odified content extraction logic to filter brief descriptions from popovers in Wikivoyage ZIM files, improving the accuracy and user experience."
+                },
+                "Taipy": {
+                    "timeframe": "Oct, 2024 - Present",
+                    "role": "Open Source Contributor",
+                    "achievements": "Improved JSON data visualization by adding collapsibility and syntax highlighting in DataNodeViewer, and implemented unit tests to ensure reliable styling and functionality for table utilities; Enhanced UI consistency by resolving styling issues and added unique CSS classes for customizable column headers."
+                }
+            }
+        },
+        "studies": {
+            "title": "Studies",
+            "institutions": {
+                "University of Jakarta": {
+                    "description": "Studied software engineering."
+                },
+                "Build the Future": {
+                    "description": "Studied online marketing and personal branding."
+                }
+            }
+        },
+        "technical": {
+            "title": "Technical skills",
+            "skills": {
+                "Figma": {
+                    "description": "Able to prototype in Figma with Once UI with unnatural speed."
+                },
+                "Nextjs": {
+                    "description": "Building next gen apps with Next.js + Once UI + Supabase."
+                }
+            }
+        }
+    },
+    "blog": {
+        "label": "Blog",
+        "title": "Writing about design and tech...",
+        "description": "Read what {name} has been up to recently"
+    },
+    "work": {
+        "label": "Work",
+        "title": "My projects",
+        "description": "Design and dev projects by {name}"
+    },
+    "gallery": {
+        "label": "Gallery",
+        "title": "My photo gallery",
+        "description": "A photo collection by {name}"
+    },
+    "projectCard": {
+        "label": "Read Case Study"
+    }
+}
