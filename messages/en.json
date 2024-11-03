@@ -45,22 +45,22 @@
         "studies": {
             "title": "Studies",
             "institutions": {
-                "University of Jakarta": {
-                    "description": "Studied software engineering."
+                "Vivekananda Institute of Professional Studies": {
+                    "description": "Bachelor's in Artificial Intelligence & Data Science."
                 },
-                "Build the Future": {
-                    "description": "Studied online marketing and personal branding."
+                "Harvard University Online": {
+                    "description": "Studied Web Development with Python & JavaScript.; Introduction to Computer Science."
                 }
             }
         },
         "technical": {
             "title": "Technical skills",
             "skills": {
-                "Figma": {
-                    "description": "Able to prototype in Figma with Once UI with unnatural speed."
+                "React": {
+                    "description": "Able to Build websites on the React Library."
                 },
                 "Nextjs": {
-                    "description": "Building next gen apps with Next.js + Once UI + Supabase."
+                    "description": "Building next gen apps with Next.js + Once UI / Next UI/ ShadCN + Supabase."
                 }
             }
         }
