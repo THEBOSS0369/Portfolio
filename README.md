@@ -1,4 +1,4 @@
-# **Build your portfolio with Once UI's Magic Portfolio**
+# **MY Magic Portfolio ;)**
 
 Magic Portfolio to Tell About ME and Shwocasing my Skills ;)
 ![image](https://github.com/user-attachments/assets/99f71804-2e1d-47c5-a79d-e9047e0af77e)
