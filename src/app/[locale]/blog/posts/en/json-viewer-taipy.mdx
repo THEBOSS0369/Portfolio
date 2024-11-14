@@ -1,0 +1,115 @@
+---
+title: "From Challenge to Success: Integrating a JSON Viewer in Taipy"
+publishedAt: "2024-11-14"
+summary: "Every developer knows the thrill of contributing to open source projects, especially when your pull request (PR) finally gets merged. I recently faced a challenging issue in the Taipy project: integrating a JSON viewer that could handle dynamic and complex data while providing a seamless user experience. In this blog post, I’ll share my journey, the obstacles I encountered, and how I ultimately solved the problem. "
+---
+
+# Introduction
+
+Every developer knows the thrill of contributing to open source projects, especially when your pull request (PR) finally gets merged. I recently faced a challenging issue in the Taipy project: integrating a JSON viewer that could handle dynamic and complex data while providing a seamless user experience. In this blog post, I’ll share my journey, the obstacles I encountered, and how I ultimately solved the problem.
+
+## The Challenges:
+
+### Getting Started Was No Easy Task
+
+Before I even began coding, the initial challenge was just setting up the project locally. It took me 10 days to get everything running properly. Here’s why:
+
+1. First, I needed to make changes in the TypeScript (.tsx) files.
+2. After modifying the files, I had to run `npm run build:dev` to compile everything and build the project.
+3. Once the build was complete, I needed to create a Python script to launch the server, allowing me to verify if my changes were correctly implemented. 
+
+This process made the setup quite time-consuming, but it was a crucial step to ensure everything was functioning properly before I could even think about submitting a PR. 
+
+But still, I learned many things by setting the project locally, so it's worth it. 😁
+
+### Displaying JSON Data Dynamically
+
+The task was to integrate a JSON viewer within the `DataNodeViewer` component to visualize dynamic JSON data. The JSON structure varied, representing a list of items with different properties. To complicate matters, the JSON data needed to be collapsible, allowing users to expand and collapse sections for better readability.
+
+Additionally, I wanted to add syntax highlighting to make it visually appealing and improve the usability of the data presented. This functionality was crucial because users needed to quickly grasp the structure of the JSON, even if it was complex.
+
+### Hacktoberfest and the 300-Point Challenge
+
+This particular issue was labeled as a 300-point challenge for Hacktoberfest, which added an exciting layer of motivation. The repository maintainers created various issues with point values → 100, 200, and 300 points based on the difficulty. Contributors could tackle these challenges, earn points, and most excitingly earn some cool swag! 😋
+
+I’m thrilled to say that for my contribution, I’ll be receiving some awesome goodies: a Jack and Jones hoodie, a bottle, and a bag as a token of appreciation from the maintainers. It’s a great feeling to be part of a community that values contributors, especially during an event like Hacktoberfest.
+
+## Breaking Down the Requirements
+
+Here’s a quick summary of what I set out to achieve:
+
+- Integrate a JSON viewer component that supports collapsing and expanding sections.
+- Ensure the viewer adapts dynamically to the JSON data, regardless of its structure.
+- Add syntax highlighting for better readability.
+- Make sure the component blends smoothly with the existing UI theme using Material-UI.
+
+## The Implementation: Step-by-Step
+
+### 1. Choosing the Right JSON Viewer Component
+
+I began by evaluating different JSON viewer libraries that could meet my requirements. After some research, I settled on `@textea/json-viewer` because it supports dynamic data, has excellent collapsibility features, and allows for customization like syntax highlighting.
+
+### 2. Setting Up the Environment
+
+To integrate the JSON viewer into the Taipy project, I first needed to import the necessary components and libraries:
+
+```tsx
+const JsonViewer = lazy(() => import("@textea/json-viewer").then(module => ({ default: module.JsonViewer })));
+const theme = useTheme(); // Material-UI hook to access theme
+```
+
+### 3. Integrating the JSON Viewer
+
+I updated the relevant section of the `DataNodeViewer` component to include the JSON viewer. Here's a snippet of the code I used:
+
+```typescript
+<Grid size={8}>
+    {typeof dtValue == "boolean" ? (
+        <Switch
+            defaultChecked={dtValue}
+            disabled={true}
+            title={`${dtValue}`}
+        />
+    ) : dtType === "dict" ? (
+        <Suspense fallback={<div>Loading JSON Viewer...</div>}>
+            <JsonViewer value={dtValue} collapsed={true} theme={theme.palette.mode} />
+        </Suspense>
+    ) : (
+        <Typography variant="subtitle2">
+            {dtType == "date"
+                ? (dataValue === null || dataValue instanceof Date) &&
+                  format(dataValue as Date, "yyyy/MM/dd HH:mm:ss")
+                : dtType == "float" && dtValue === null
+                ? "NaN"
+                : `${dtValue}`}
+        </Typography>
+    )}
+</Grid>
+```
+
+The theme was an important addition here. By accessing theme.palette.mode I ensured that the JSON viewer adapted to the current theme (light or dark mode) used in the app.
+
+### 4. Fine-Tuning and Testing
+
+After setting up the basic functionality, I tested the integration with various JSON datasets to ensure it handled different structures gracefully. I adjusted the collapsed property to true for better initial readability and added a fallback loader while the JSON viewer was being loaded.
+
+### 5. PR Submission and Feedback
+
+Once I was satisfied with the implementation, I submitted the PR. The review process involved some minor adjustments and code styling improvements, but I was glad to see that the core solution worked well. After incorporating the feedback from the maintainers, my PR was merged successfully!
+
+## Lessons Learned
+This task taught me several valuable lessons:
+
+- **Project Setup Takes Time**: Setting up the project was a significant part of the challenge. I learned to be patient during this phase to avoid potential issues down the line.
+- **Understanding Project Requirements**: It’s essential to break down the problem into smaller parts and understand each requirement before diving into the code.
+- **Choosing the Right Tool**: Picking the right library (in my case @textea/json-viewer) can save a lot of time and effort.
+- **Styling Matters**: Making the JSON viewer adapt to the current theme helped maintain a consistent UI experience.
+- **Testing is Key**: Testing with a variety of data ensured the component’s robustness and adaptability.
+
+## Conclusion
+
+Contributing to the Taipy project and having my PR merged was a rewarding experience. *The journey from setting up the environment to resolving complex technical challenges was a valuable learning opportunity*. The bonus? I earned 300 Hacktoberfest points and some awesome swag for my efforts.
+
+If you’re also contributing to open-source projects, my advice is to dive in, face the challenges head-on and don’t be afraid to ask for feedback from the community. You’ll be surprised how much you can learn along the way.
+
+Stay tuned for more updates on my open-source journey!
