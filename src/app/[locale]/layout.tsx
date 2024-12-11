@@ -16,6 +16,7 @@ import { getMessages, getTranslations, unstable_setRequestLocale } from 'next-in
 import { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import { renderContent } from "@/app/resources";
+import { Analytics } from "@vercel/analytics/react";
 
 export async function generateMetadata(
 	{ params: { locale }}: { params: { locale: string }}
@@ -128,6 +129,7 @@ export default async function RootLayout({
 							fillWidth minHeight="0">
 							<RouteGuard>
 								{children}
+								<Analytics />
 							</RouteGuard>
 						</Flex>
 					</Flex>
