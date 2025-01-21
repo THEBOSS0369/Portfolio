@@ -1,0 +1,215 @@
+---
+title: "Setting Up Next.js Authentication with Supabase: A Complete Guide"
+publishedAt: "2025-01-20"
+summary: "Setting Up Next.js Authentication with Supabase: A Complete Guide"
+---
+
+![Supabase login](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/tslzkzuo2caq9n1orhse.png)
+
+Hey there! Its been 2 months since my last blog. Damnnn don’t worry guys from this one i will be consistent my promise. 😉🥂
+Today, I want to walk you through implementing authentication in your Next.js application using Supabase. I recently did this for a project which i’m building these along with open source contributions(stay tuned will share more details soon 😈), so I thought I’d share my experience to help others navigate this process more smoothly.
+
+## The Setup: What We Need
+
+Before diving in, make sure you have:
+
+- A Next.js project (we'll use TypeScript)
+- A Supabase account with a new project
+- The `@supabase/ssr` package installed
+
+## Creating Supabase Clients
+
+The first thing we need to understand is that we'll need two different Supabase clients: one for the client-side and another for the server-side. Let's set those up!
+
+### Client-Side Setup
+
+In `utils/supabase/client.ts`, we'll create our browser client:
+
+```typescript
+import { createBrowserClient } from "@supabase/ssr";
+
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+}
+```
+
+### Server-Side Setup
+
+For server components, we need a slightly different setup in `utils/supabase/server.ts`:
+
+```typescript
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+
+export async function createClient() {
+  const cookieStore = await cookies();
+
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options)
+            );
+          } catch {
+            // This can be ignored if you have middleware refreshing sessions
+          }
+        },
+      },
+    }
+  );
+}
+```
+
+## Middleware Magic: Keeping Sessions Fresh
+
+Here's where it gets interesting! We need middleware to handle session refreshing. Create two files:
+
+`middleware.ts` at your project root:
+
+```typescript
+import { type NextRequest } from "next/server";
+import { updateSession } from "@/utils/supabase/middleware";
+
+export async function middleware(request: NextRequest) {
+  return await updateSession(request);
+}
+
+export const config = {
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
+};
+```
+
+And `utils/supabase/middleware.ts`:
+
+```typescript
+import { createServerClient } from "@supabase/ssr";
+import { NextResponse, type NextRequest } from "next/server";
+
+export async function updateSession(request: NextRequest) {
+  let response = NextResponse.next({ request });
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return request.cookies.getAll();
+        },
+        setAll(cookiesToSet) {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            response.cookies.set(name, value, options);
+          });
+        },
+      },
+    }
+  );
+
+  await supabase.auth.getUser();
+  return response;
+}
+```
+
+## Creating the Login Page
+
+Now for the fun part - let's create a login page! Create `app/login/page.tsx`:
+
+```typescript
+import { login, signup } from "./actions";
+
+export default function LoginPage() {
+  return (
+    <form>
+      <label htmlFor="email">Email:</label>
+      <input id="email" name="email" type="email" required />
+      <label htmlFor="password">Password:</label>
+      <input id="password" name="password" type="password" required />
+      <button formAction={login}>Log in</button>
+      <button formAction={signup}>Sign up</button>
+    </form>
+  );
+}
+```
+
+And the corresponding actions in `app/login/actions.ts`:
+
+```typescript
+"use server";
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { createClient } from "@/utils/supabase/server";
+
+export async function login(formData: FormData) {
+  const supabase = await createClient();
+
+  const data = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
+
+  const { error } = await supabase.auth.signInWithPassword(data);
+
+  if (error) {
+    redirect("/error");
+  }
+
+  revalidatePath("/", "layout");
+  redirect("/account");
+}
+
+export async function signup(formData: FormData) {
+  const supabase = await createClient();
+
+  const data = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
+
+  const { error } = await supabase.auth.signUp(data);
+
+  if (error) {
+    redirect("/error");
+  }
+
+  revalidatePath("/", "layout");
+  redirect("/account");
+}
+```
+
+## Pro Tips and Gotchas
+
+1. **Always use `getUser()` for Protection**: When protecting pages, always use `supabase.auth.getUser()` instead of `getSession()`. It's more secure because it validates the auth token with Supabase's servers every time.
+
+2. **Cookie Handling**: Server Components can't write cookies directly, which is why we need the middleware to handle session refreshing.
+
+3. **Route Protection**: Be careful when protecting routes - remember that cookies can be spoofed, so always verify the user session server-side.
+
+4. **Email Templates**: Don't forget to update your Supabase email templates to support server-side auth flows. You'll want to change the confirmation URL format in your email templates.
+
+## What's Next?
+
+Now that you have authentication set up, you might want to:
+
+- Add social authentication providers
+- Implement password reset functionality
+- Create protected API routes
+- Set up user profiles and additional data storage
+
+The foundation we've built here makes adding these features relatively straightforward.
+
+Remember to check out the [Supabase docs](https://supabase.com/docs) and [Next.js documentation](https://nextjs.org/docs) for more detailed information and advanced features!
+
+Happy coding! 🚀
