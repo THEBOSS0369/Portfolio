@@ -57,8 +57,11 @@ const home = {
     label: 'Home',
     title: `${person.name}'s Portfolio`,
     description: `Portfolio website showcasing my work as a ${person.role}`,
-    headline: <>Web Developer and Open Source Contributor</>,
-    subline: <>I'm Anuj, Sophomore at VIPS doing my undergrad in <InlineCode>AI & DS</InlineCode>, where I am learning about<br /> Artificial Intelligence & Dat Science. After hours, I build my own projects and love to contribute to Open Source.</>
+    headline: <>Founder, I Build Scalable MVPs & Open Source Contributor</>,
+    subline: <>I'm Anuj, I'm not just a developer - I am a <InlineCode>FOUNDER</InlineCode> who builds MVPs and accelerates startup success. Currently Sophomore at VIPS doing my undergrad in <InlineCode>AI & DS</InlineCode>. After hours, I build my own projects and love to contribute to Open Source.
+    {/* <br /> */}
+    {/* I'm not just a DEVELOPER but i'm the BUILDER */}
+  </>
 }
 
 const about = {
@@ -79,35 +82,23 @@ const about = {
     intro: {
         display: true,
         title: 'Introduction',
-        description: <>Anuj is a 2nd Year undergrad at VIPS, pursuing B-Tech in Aritificial Intelligence and Data Science. His Tech Stacks are Based on Typescript and JavaScript. He loves to Contribute to Open Source.</>
+        description: <>I’m Anuj, an enthusiastic Founder Developer. I specialize in building MVPs that validate startup ideas and set the stage for scalable growth. With expertise in rapid prototyping and user-centric design, I’ve developed MVPs that have been crucial for startup’s market entry and success. My mission is to create innovative solutions that drive significant impact and push the boundaries of technology. If you’re looking to launch your next big idea, let’s connect and build something extraordinary together ;)</>
     },
     work: {
         display: true, // set to false to hide this section
         title: 'Work Experience',
         experiences: [
-            {
-                company: 'Layer5',
-                timeframe: 'Sep, 2024 - Present',
-                role: 'Open Source Contributor',
-                achievements: [
-                    <>Improved UI/UX by developing new components using Next.js and Tailwind CSS. Implemented automation scripts in Node.js to optimize the build process.</>,
-                    <>Refactored many Key components from class-based to functional components, ensuring compatibility with MUI v5 and modern React practices.</>
-                ],
-                images: [ // optional: leave the array empty if you don't want to display images
-                    // {
-                    //     src: '/images/projects/project-01/layer.png',
-                    //     alt: 'Once UI Project',
-                    //     width: 16,
-                    //     height: 9
-                    // }
-                ]
-            },
-            {
+{
                 company: 'Kiwix',
-                timeframe: 'Sep, 2024 - Present',
-                role: 'Open Source Contributor',
+                timeframe: 'Sep, 2024 - May, 2025',
+                role: 'Full Stack Developer Intern',
                 achievements: [
                     <>Modified content extraction logic to filter brief descriptions from popovers in Wikivoyage ZIM files, improving the accuracy and user experience.</>,
+          <> Implemented microservices architecture and secure authentication, deploying on GCP with Kubernetes</>,
+          <>Automated CI/CD workflows and monitored application performance automating CI/CD workflows to achieve
+ 99.9% uptime, ensuring scalability and reliability</>,
+          <>Collaborated with global teams to define best practices and deliver robust backend solutions, contributing to 3+
+ major releases with zero critical bugs</>
                 ],
                 images: [
                     // {
@@ -120,16 +111,44 @@ const about = {
             },
             {
                 company: 'Taipy',
-                timeframe: 'Oct, 2024 - Present',
-                role: 'Open Source Contributor',
+                timeframe: 'Oct, 2024 - Nov, 2024',
+                role: 'Full Stack Developer Intern',
                 achievements: [
-                    <>Enhanced UI consistency by resolving styling issues and added unique CSS classes for customizable column headers.</>,
-                    <>Improved JSON data visualization by adding collapsibility and syntax highlighting in DataNodeViewer, and implemented unit tests to ensure reliable styling and functionality for table utilities</>
+                    <>Developed scalable full-stack applications using React.js, Next.js, Node.js, and Python, integrating RESTful
+                      APIs and MongoDB.
+                    </>,
+                    <>Designed responsive UI with Tailwind CSS and Redux, optimizing for performance and cross-browser</>,
+          <>Implemented secure authentication (JWT, OAuth) enhancing application security for 500+ user sessions and
+                      CI/CD pipelines using Docker and AWS for seamless deployment, achieved 30% faster deployment cycles.</>,
+          <>Collaborated with teams to conduct code reviews, write tests with Jest (improving code coverage by 15%), and
+                      deliver high-quality, maintainable code while working as an intern</>
                 ],
                 images: [
 
                 ]
             },
+            {
+                company: 'Layer5',
+                timeframe: 'Nov, 2024 - April, 2025',
+                role: 'Front End Developer Intern',
+                achievements: [
+                    <>As an Intern I Built responsive, animated UI components with React.js, Next.js, and Tailwind CSS, using
+ Zustand for state management to increase user engagement by 20%</>,
+                    <>Transformed Figma designs into pixel-perfect, improved rendering speed by 15%.</>,
+          <>Integrated APIs and optimized frontend performance through code reviews and testing with Cypress</>,
+          <> Worked cross-functionally to define requirements and ship innovative features, adhering to coding standards</>
+                ],
+                images: [ // optional: leave the array empty if you don't want to display images
+                    // {
+                    //     src: '/images/projects/project-01/layer.png',
+                    //     alt: 'Once UI Project',
+                    //     width: 16,
+                    //     height: 9
+                    // }
+                ]
+            },
+            
+            
             {
                 company: 'Learn JS',
                 timeframe: 'Aug 2024 - Sep 2024',
@@ -151,11 +170,11 @@ const about = {
                 description: <>Bachelor's in Artificial Intelligence & Data Science.</>,
             },
             {
-                name: 'Harvard University Online',
-                description: <>Studied Web Development with Python & JavaScript.</>,
+                name: 'Harvard University ',
+                description: <>Web Development with Python & JavaScript.</>, 
             },
             {
-                name: 'Harvard University Online',
+                name: 'Harvard University',
                 description: <>Introduction to Computer Science.</>,
             },
 
@@ -166,8 +185,8 @@ const about = {
         title: 'Technical skills',
         skills: [
             {
-                title: 'Next.js',
-                description: <>Building next gen apps with Next.js + ShadCN UI / Next UI + Supabase.</>,
+                title: 'Frontend',
+                description: <> React.js, Next.js, Tailwind CSS, Redux, Zustand, Angular, Vue.js</>,
                 images: [
                     {
                         src: '/images/projects/image-analyze/main.png',
@@ -184,8 +203,8 @@ const about = {
                 ]
             },
             {
-                title: 'React',
-                description: <>Able to create Website based on React Libraries.</>,
+                title: 'Backend',
+                description: <> Node.js, Express.js, Flask, FastAPI, Django</>,
                 images: [
                     {
                         src: '/images/projects/pokemon-cs/Front Page 1.png',
@@ -199,6 +218,33 @@ const about = {
                         width: 16,
                         height: 9
                     },
+                ]
+            }, 
+            {
+                title: 'Languages',
+                description: <>JavaScript, TypeScript, Python, HTML5, CSS3, SQL, GraphQL, Java, C/C++</>,
+                images: [
+                ]
+            },
+            {
+                title: 'Database',
+                description: <> MongoDB, PostgreSQL, MySQL, Supabase, Firebase, Prisma ORM</>,
+                images: [
+                ]
+            },
+            {
+                title: 'Tools',
+                description: <> Git, Docker, Kubernetes, AWS, GCP, Figma, Jest, Shadcn UI, Cypress, Shopify,
+                                Webpack, Automation, Linux (wsl), Loveable, Claude, Cursor</>,
+                images: [
+                ]
+            },
+            {
+                title: 'Concepts',
+                description: <>  RESTful APIs, GraphQL, Server-Side Rendering, Microservices, CI/CD, DevOps,
+ Secure Authentication (OAuth, JWT), Object-Oriented Design, Data Structures, Algorithms, Software
+ Development Lifecycle, Code Reviews, Testing, Deployment, AI/ML Integration , Command Line</>,
+                images: [
                 ]
             }
         ]
