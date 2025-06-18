@@ -253,36 +253,12 @@ const about = {
           <> React.js, Next.js, Tailwind CSS, Redux, Zustand, Angular, Vue.js</>
         ),
         images: [
-          {
-            src: "/images/projects/image-analyze/main.png",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/Details 4.png",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
         ],
       },
       {
         title: "Backend",
         description: <> Node.js, Express.js, Flask, FastAPI, Django</>,
         images: [
-          {
-            src: "/images/projects/pokemon-cs/Front Page 1.png",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/pokemon-cs/Login Page.png",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
         ],
       },
       {
